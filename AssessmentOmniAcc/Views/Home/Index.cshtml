@@ -1,0 +1,65 @@
+﻿
+@model PagedList.IPagedList<AssessmentOmniAcc.Models.Stock>
+@using PagedList.Mvc;
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="form-horizontal">
+    <hr />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @using (Html.BeginForm("GetByCode", "Home"))
+    {
+
+        <header>
+            Search using bar code: @Html.TextBox("SearchString", null, new { @class = "form-control valid", @data_val = "true", @data_val_required = "Bar Code is required" })
+            @Html.ValidationSummary(null, new { @style = "color:red", })
+            <input type="submit" value="Search" class="btn btn-primary" />
+
+        </header>
+
+    }
+
+    <div class="form-group">
+        <table class="table table-responsive" style="width:400px">
+            <tr>
+                <th>
+                  Desciption
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Bar Code
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.stock_description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.incl_unit_selling_price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bar_code)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    </div>
+</div>

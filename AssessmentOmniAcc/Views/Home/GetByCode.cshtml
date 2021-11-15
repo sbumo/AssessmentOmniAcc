@@ -1,0 +1,50 @@
+﻿@model AssessmentOmniAcc.Models.Stock
+
+@{
+    ViewBag.Title = "GetByCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    
+    <hr />
+    <div class="form-group">
+        <table class="table table-responsive" style="width:400px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.stock_code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.stock_description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.bar_code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.incl_unit_selling_price)
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.stock_code)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.stock_description)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.bar_code)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.incl_unit_selling_price)
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
